@@ -1,25 +1,20 @@
 class reverseInt
-{
+{  static  int sum=0;
 	public static void main(String[] args) {
-		int n=4522;
-		int d=n;
-		int count=0;
-		while(d>0)
-		{
-			count++;
-			d=d/10;
-		}
-		int base=(int)Math.pow(10,count-1);
+		int n=4067;
 		int sum=0;
-		while(n>0)
-		{
-			d=n%10;
-			sum=sum+base*d;
-			base=base/10;
-			n=n/10;
-		}
-		System.out.println(sum);
+		
+System.out.println(check(n));
 
+	}
+
+
+	static int check(int n)
+	{
+		if(n==0)
+			return sum;
+		sum=sum*10+n%10;
+		return check(n/10);
 	}
 
 }
