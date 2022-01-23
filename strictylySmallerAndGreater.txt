@@ -1,0 +1,48 @@
+class Solution {
+    public int countElements(int[] nums) {
+        int maxfromLeft[]=new int[nums.length];
+        int maxfromRight[]=new int[nums.length];
+          int minfromLeft[]=new int[nums.length];
+          int minfromRight[]=new int[nums.length];
+        
+        
+        maxfromLeft[0]=nums[0];
+        for(int i=1;i<nums.length;i++)
+        {
+maxfromLeft[i]=Math.max(maxfromLeft[i-1],nums[i]);
+        }
+        
+        maxfromRight[nums.length-1]=nums[nums.length-1];
+        for(int i=nums.length-2;i>=0;i--)
+        {
+maxfromRight[i]=Math.max(maxfromRight[i+1],nums[i]);
+        }
+         minfromLeft[0]=nums[0];
+        for(int i=1;i<nums.length;i++)
+        {
+minfromLeft[i]=Math.min(minfromLeft[i-1],nums[i]);
+        }
+        
+         minfromRight[nums.length-1]=nums[nums.length-1];
+        for(int i=nums.length-2;i>=0;i--)
+        {
+minfromRight[i]=Math.min(minfromRight[i+1],nums[i]);
+        }
+        int count=0;
+
+        for(int i=0;i<nums.length;i++)
+        {
+         int d=nums[i];
+            int max=Math.max(maxfromLeft[i],maxfromRight[i]);
+            
+             int min=Math.min(minfromLeft[i],minfromRight[i]);
+            
+            if(d<max && d>min)
+                count++;
+        
+        }
+        return count;
+        
+        
+    }
+}
