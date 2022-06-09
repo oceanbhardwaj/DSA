@@ -1,51 +1,50 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
     public ListNode swapPairs(ListNode head) {
-        if(head==null || head.next==null)
-            return head;
-        ListNode left=head;
-        ListNode right=head.next;
-        ListNode curr=head;
-        while(right!=null && left!=null)
-        {
-            int value=right.val;
-        int value2=left.val;
-        left.val=value;
-            right.val=value2;
-            if(right.next==null)
-                right=null;
-            else
-            right=right.next.next;
-            
-            left=left.next.next;
+        ListNode ans=head;
+        while(head!=null && head.next!=null){
+            int first=head.val;
+            int sec=head.next.val;
+            head.val=sec;
+            head.next.val=first;
+            head=head.next.next;
         }
-        
-        return curr;
-        
+        return ans;
     }
 }
-////////////////////////////////////////////////////////////////////
+--------------------------------
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
     public ListNode swapPairs(ListNode head) {
-        if(head==null || head.next==null)
-            return head;
-       
-        
-    ListNode dummy=new ListNode(0);
-    dummy.next=head;
-    ListNode curr=dummy;
-    while(curr.next!=null && curr.next.next!=null)
-    {
-        ListNode f=curr.next;
-        ListNode s=curr.next.next;
-        f.next=s.next;
-        curr.next=s;
-        curr.next.next=f;
-        curr=curr.next.next;
-        
-    }
-        
-        
-        return dummy.next;
-        
+        ListNode temp=new ListNode(0);
+        temp.next=head;
+        ListNode curr=temp;
+        while(curr.next!=null && curr.next.next!=null){
+            ListNode first=curr.next;
+            ListNode sec=curr.next.next;
+            first.next=sec.next;
+            curr.next=sec;
+            curr.next.next=first;
+            curr=curr.next.next;
+        }
+        return temp.next;
     }
 }
