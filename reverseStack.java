@@ -1,37 +1,69 @@
-/*package whatever //do not write package name here */
+//{ Driver Code Starts
+//Initial Template for Java
 
 import java.util.*;
+import java.io.*;
+import java.lang.*;
 
-///revsere a stack
-class GFG {
-    static	Stack<Integer> s;
-	public static void main (String[] args) {
-    s=new Stack<>();
-	s.push(1);
-	s.push(2);
-	s.push(3);
-	call();
-	while(!s.isEmpty()){
-	    System.out.println(s.pop());
-	}
-	
-	}
-	public static void call(){
-	    if(s.size()==0)
-	    return;
-	    int temp=s.pop();
-	    call();
-	    insert(temp);
-	   
-	}
-	public static void insert(int ele){
-	    if(s.isEmpty())
-	    {
-	        s.push(ele);
-	        return;
-	    }
-	    int temp=s.pop();
-	    insert(ele);
-	    s.push(temp);
-	}
+class GFG
+{
+    public static void main(String args[])throws IOException
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+        PrintWriter out=new PrintWriter(System.out);
+        
+        //taking testcases
+        int t = Integer.parseInt(br.readLine()); 
+    	for(int i=0;i<t;i++)
+    	{
+            String str=br.readLine();
+    		
+    		//input n and d
+    	    int n=Integer.parseInt(str);
+    		Stack<Integer> stack=new Stack<>();
+    		String str1=br.readLine();
+    		String[] starr1=str1.split(" ");
+    		//inserting elements in the array
+    		for(int j=0;j<n;j++)
+    		{
+    		    stack.push(Integer.parseInt(starr1[j]));
+    		}
+    		//calling reverse() function
+            Solution.reverse(stack);
+            for(int j:stack){
+                out.print(j+" ");
+            }
+            out.println();
+         }
+         out.close();
+    }
+}
+// } Driver Code Ends
+
+
+//User function Template for Java
+
+class Solution
+{ 
+    static void reverse(Stack<Integer> s)
+    {
+       if(s.size()==1)
+       return ;
+       int temp=s.pop();
+       reverse(s);
+       insert(s,temp);
+       return;
+       
+    }
+    public static void insert(Stack<Integer> s,int temp){
+        if(s.isEmpty())
+        {
+            s.push(temp);
+            return;
+        }
+        int ele=s.pop();
+        insert(s,temp);
+        s.push(ele);
+        return;
+    }
 }
