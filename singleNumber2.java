@@ -1,17 +1,16 @@
 class Solution {
-    public int[] singleNumber(int[] nums) {
-        int res[]=new int[2];
-        int xor=0;
-        for(int i=0;i<nums.length;i++){
-            xor=xor^nums[i];
-        }
-        int xorSetBit=xor & (-xor);
-        for(int i=0;i<nums.length;i++){
-            if((xorSetBit & nums [i]) !=0)
-                res[0]=res[0]^nums[i];
-            else
-                res[1]=res[1]^nums[i];
-        }
-        return res;
+    public int singleNumber(int[] nums) {
+        int ans=0;
+        int one=0;
+       for(int i=0;i<32;i++){
+           one=0;
+           for(int j=0;j<nums.length;j++){
+               if((nums[j] & (1<<i))!=0)
+                   one++;
+           }
+           one=one%3;
+           ans=ans|(one<<i);
+       }
+        return ans;
     }
 }
