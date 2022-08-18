@@ -13,12 +13,16 @@ class Solution
     //Function to sort the array using bubble sort algorithm.
 	public static void bubbleSort(int arr[], int n)
     {
-        for(int i=0;i<n;i++){
-            for(int j=i+1;j<n;j++){
-                if(arr[i]>arr[j]){
-                    swap(i,j,arr);
+        for(int i=0;i<n-1;i++){ //rounds
+        boolean swapped=false;
+            for(int j=0;j<n-1-i;j++){
+                if(arr[j]>arr[j+1]){
+                    swap(j,j+1,arr);
+                    swapped=true;
                 }
             }
+            if(!swapped)
+            break;
         }
     }
     public static void swap(int i,int j,int arr[]){
