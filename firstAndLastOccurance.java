@@ -1,40 +1,43 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
         int arr[]=new int[2];
-       arr[0]=binarySearchFirstOcc(nums,target);
-        arr[1]=binarySearchLastOcc(nums,target);
+       arr[0]=getFloor(nums,target);
+       arr[1]=getCeil(nums,target);
         return arr;
     }
-    public int binarySearchFirstOcc(int nums[],int target){
+    public int getFloor(int nums[],int target){
         int ans=-1;
-        int start=0;
-        int end=nums.length-1;
-        while(start<=end){
-            int mid=(start-(start-end)/2);
-            if(nums[mid]==target)
+        int low=0;
+        int high=nums.length-1;
+        while(low<=high){
+            int mid=(low+(high-low)/2);
+            if(target==nums[mid]){
                 ans=mid;
-            if(nums[mid]>=target){
-                end=mid-1;
+                high=mid-1;
+            }else if(target<nums[mid])
+                high=mid-1;
+            else{
+                low=mid+1;
             }
-            else
-                start=mid+1;
-            }
-         return ans;
+                
         }
-       
-    
-    public int binarySearchLastOcc(int nums[],int target){
+        return ans;
+    }
+    public int getCeil(int nums[],int target){
         int ans=-1;
-        int start=0;
-        int end=nums.length-1;
-        while(start<=end){
-            int mid=(start-(start-end)/2);
-            if(nums[mid]==target)
+        int low=0;
+        int high=nums.length-1;
+        while(low<=high){
+            int mid=(low+(high-low)/2);
+            if(target==nums[mid])
+            {
                 ans=mid;
-            if(nums[mid]>target){
-                end=mid-1;
-            }else
-                start=mid+1;
+                low=mid+1;
+            }else if(target<nums[mid]) {
+                high=mid-1;
+            }else{
+               low=mid+1;
+            }
         }
         return ans;
     }
