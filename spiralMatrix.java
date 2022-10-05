@@ -1,49 +1,47 @@
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
-        List<Integer> a=new ArrayList<>();
-        int count=0;
-    
-        int minr=0;
-        int minc=0;
-        int maxr=matrix.length-1;
-        int maxc=matrix[0].length-1;
-        int total=(maxc+1)*(maxr+1);
-        int j=0;
-        int i=0;
-        while(count<total){
-            //first row
-           // System.out.println("minr :"+minr +"  maxr :"+maxr);
-           // System.out.println("minc :"+minc +"  maxc :"+maxc);
-            for( j=minc, i=minr;j<=maxc && count<total ;j++){
-                a.add(matrix[i][j]);
-                count++;
+        List<Integer> list=new ArrayList<>();
+        int rows=0;
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int rowe=n-1;
+        int cols=0;
+        int cole=m-1;
+        int count=n*m;
+        while(true){
+        //first row
+            for(int i=cols;i<=cole && count>0 ;i++){
+                list.add(matrix[rows][i]);
+                count--;
             }
-            minr++;
-            
+           
+            rows++;
             
             //last col
-            for(i=minr,j=maxc;i<=maxr  && count<total;i++){
-            a.add(matrix[i][j]);
-                count++;
+            for(int i=rows;i<=rowe && count>0 ;i++){
+                list.add(matrix[i][cole]);
+                count--;
             }
-            maxc--;
-            
+          
+            cole--;
             
             //last row
-            for(j=maxc,i=maxr ;j>=minc &&  count<total ;j--){
-                a.add(matrix[i][j]);
-                count++;
+            for(int i=cole;i>=cols && count>0 ;i--){
+                list.add(matrix[rowe][i]);
+                count--;
             }
-            maxr--;
             
-            
+            rowe--;
             //first col
-            for(i=maxr, j=minc;i>=minr  && count<total;i--){
-                a.add(matrix[i][j]);
-                count++;
+            for(int i=rowe;i>=rows && count>0 ;i--){
+                list.add(matrix[i][cols]);
+                count--;
             }
-            minc++;
+             
+            cols++;
+            if(count<=0)
+                break;
         }
-        return a;
+        return list;
     }
 }
